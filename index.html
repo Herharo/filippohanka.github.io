@@ -17,6 +17,16 @@
     .wave-bg { animation: wave 8s infinite linear; }
     .particle { position: absolute; border-radius: 50%; opacity: 0.5; animation: float 12s infinite ease-in-out; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    .timeline-item { position: relative; padding-left: 40px; }
+    .timeline-item:before { content: ''; position: absolute; left: 15px; top: 0; width: 2px; height: 100%; background: #a9b5e5; }
+    .timeline-item:after { content: ''; position: absolute; left: 10px; top: 5px; width: 12px; height: 12px; background: #a9b5e5; border-radius: 50%; }
+    .progress-bar { height: 10px; border-radius: 5px; background-color: #e5e7eb; overflow: hidden; }
+    .progress-fill { height: 100%; transition: width 1s ease-in-out; }
+    .project-card { transition: transform 0.3s; }
+    .project-card:hover { transform: translateY(-10px); }
+    .carousel { transition: transform 0.5s ease-in-out; }
+    .hobby-icon { transition: transform 0.3s; }
+    .hobby-icon:hover { transform: rotate(360deg); }
   </style>
 </head>
 <body class="bg-[#e6f0fa] text-gray-800 font-sans overflow-x-hidden">
@@ -87,17 +97,57 @@
           <h2 class="text-5xl font-bold mb-10 text-[#d9e1fa]">Ocenenia a zručnosti</h2>
           <div class="space-y-10">
             <div class="bg-[#f5f8fe] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 class="text-3xl font-semibold text-[#a9b5e5]">Ocenenia</h3>
-              <p class="text-xl text-[#6b7280] leading-relaxed">HackTheBox rank: Hacker</p>
-              <p class="text-xl text-[#6b7280] leading-relaxed">V 7 ročníku som skončil v top 10% v Scratch cup na Slovensku</p>
-              <p class="text-xl text-[#6b7280] leading-relaxed">Účasť na Python cup a účasť na školských turnajoch v šachu</p>
-              <p class="text-xl text-[#6b7280] leading-relaxed">Účasť na majstrovstvách Slovenska vo florballe, 2.miesto na bratislavskej lige vo florballe</p>
+              <h3 class="text-3xl font-semibold text-[#a9b5e5] mb-4">Ocenenia - Timeline</h3>
+              <div class="space-y-6">
+                <div class="timeline-item">
+                  <p class="text-xl text-[#6b7280] font-semibold">HackTheBox rank: Hacker</p>
+                  <p class="text-lg text-[#6b7280]">2023 - súčasnosť</p>
+                </div>
+                <div class="timeline-item">
+                  <p class="text-xl text-[#6b7280] font-semibold">Top 10% v Scratch cup na Slovensku</p>
+                  <p class="text-lg text-[#6b7280]">7. ročník</p>
+                </div>
+                <div class="timeline-item">
+                  <p class="text-xl text-[#6b7280] font-semibold">Účasť na Python cup a školských turnajoch v šachu</p>
+                  <p class="text-lg text-[#6b7280]">Rôzne roky</p>
+                </div>
+                <div class="timeline-item">
+                  <p class="text-xl text-[#6b7280] font-semibold">2. miesto na bratislavskej lige vo florballe</p>
+                  <p class="text-lg text-[#6b7280]">Účasť na majstrovstvách Slovenska</p>
+                </div>
+              </div>
             </div>
             <div class="bg-[#f5f8fe] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
               <h3 class="text-3xl font-semibold text-[#a9b5e5]">Zručnosti</h3>
-              <p class="text-xl text-[#6b7280] leading-relaxed">Programovanie v jazykoch: Python, Swift - začiatočník</p>
-              <p class="text-xl text-[#6b7280] leading-relaxed">Jazyky: Slovenčina - materinský jazyk, Angličtina - C1, Nemčina - A2</p>
-              <p class="text-xl text-[#6b7280] leading-relaxed">Ostatné záujmy: Hra na gitare, Experimentálny rap, Čítanie biografií o inovátoroch, Fitko</p>
+              <div class="mt-4 space-y-4">
+                <div>
+                  <p class="text-lg text-[#6b7280]">🐍 Python</p>
+                  <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '70%' }}></div></div>
+                </div>
+                <div>
+                  <p class="text-lg text-[#6b7280]">🍎 Swift</p>
+                  <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '30%' }}></div></div>
+                </div>
+                <div>
+                  <p class="text-lg text-[#6b7280]">🇸🇰 Slovenčina</p>
+                  <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '100%' }}></div></div>
+                </div>
+                <div>
+                  <p class="text-lg text-[#6b7280]">🇬🇧 Angličtina</p>
+                  <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '90%' }}></div></div>
+                </div>
+                <div>
+                  <p class="text-lg text-[#6b7280]">🇩🇪 Nemčina</p>
+                  <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '40%' }}></div></div>
+                </div>
+              </div>
+              <p class="text-xl text-[#6b7280] leading-relaxed mt-4">Ostatné záujmy:</p>
+              <div class="flex flex-wrap gap-4 mt-2">
+                <span class="text-lg text-[#6b7280]" title="Hra na gitare">Hra na gitare</span>
+                <span class="text-lg text-[#6b7280]" title="Experimentálny rap">Experimentálny rap</span>
+                <span class="text-lg text-[#6b7280]" title="Čítanie biografií">Čítanie biografií o inovátoroch</span>
+                <span class="text-lg text-[#6b7280]" title="Fitko">Fitko</span>
+              </div>
             </div>
           </div>
         </div>
@@ -125,6 +175,7 @@
         <Home />
         <About />
         <Experience />
+        <Projects />
         <Contact />
       </div>
     );
