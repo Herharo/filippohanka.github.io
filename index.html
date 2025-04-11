@@ -8,41 +8,65 @@
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  <style    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
     @keyframes wave { 0% { d: path("M0,50 Q50,40 100,50 T200,50"); } 50% { d: path("M0,50 Q50,60 100,50 T200,50"); } 100% { d: path("M0,50 Q50,40 100,50 T200,50"); } }
-    .animate-fadeInUp { animation: fadeInUp 1.5s ease-out; }
+    .animate-fadeInUp { animation: fadeInUp 1s ease-out; }
     .animate-pulse { animation: pulse 2s infinite ease-in-out; }
     .wave-bg { animation: wave 8s infinite linear; }
-    .particle { position: absolute; border-radius: 50%; opacity: 0.5; animation: float 12s infinite ease-in-out; }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: UtranslateY(-20px); } }
-    .timeline-item { position: relative; padding-left: 40px; }
-    .timeline-item:before { content: ''; position: absolute; left: 15px; top: 0; width: 2px; height: 100%; background: #a9b5e5; }
-    .timeline-item:after { content: ''; position: absolute; left: 10px; top: 5px; width: 12px; height: 12px; background: #a9b5e5; border-radius: 50%; }
-    .progress-bar { height: 10px; border-radius: 5px; background-color: #e5e7eb; overflow: hidden; }
-    .progress-fill { height: 100%; transition: width 1s ease-in-out; }
+    .particle { position: absolute; border-radius: 50%; opacity: 0.4; animation: float 10s infinite ease-in-out; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .timeline-item { position: relative; padding-left: 30px; }
+    .timeline-item:before { content: ''; position: absolute; left: 10px; top: 0; width: 2px; height: 100%; background: #a9b5e5; }
+    .timeline-item:after { content: ''; position: absolute; left: 6px; top: 5px; width: 8px; height: 8px; background: #a9b5e5; border-radius: 50%; }
+    .progress-bar { height: 8px; border-radius: 4px; background-color: #e5e7eb; overflow: hidden; }
+    .progress-fill { height: 100%; transition: width 0.8s ease-in-out; }
     .project-card { transition: transform 0.3s; }
-    .project-card:hover { transform: translateY(-10px); }
+    .project-card:hover { transform: translateY(-5px); }
     .carousel { transition: transform 0.5s ease-in-out; }
     .hobby-icon { transition: transform 0.3s; }
     .hobby-icon:hover { transform: rotate(360deg); }
+
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      nav { padding: 1rem; }
+      nav ul { flex-direction: column; gap: 1rem; text-align: center; }
+      nav ul li a { font-size: 1rem; }
+      #domov h1 { font-size: 2.5rem; }
+      section { padding: 2rem 1rem; min-height: auto; }
+      .max-w-3xl, .max-w-4xl { max-width: 100%; padding: 1.5rem; }
+      h2 { font-size: 2rem; }
+      p, .text-xl, .text-lg { font-size: 1rem; line-height: 1.5; }
+      .timeline-item { padding-left: 2rem; }
+      .progress-bar { height: 6px; }
+      .flex-wrap { gap: 0.5rem; }
+      .particle { display: none; }
+      svg.wave-bg { height: 20%; }
+    }
+
+    @media (max-width: 480px) {
+      #domov h1 { font-size: 2rem; }
+      h2 { font-size: 1.75rem; }
+      .timeline-item { padding-left: 1.5rem; }
+      .timeline-item:before { left: 5px; }
+      .timeline-item:after { left: 2px; width: 6px; height: 6px; }
+    }
   </style>
 </head>
 <body class="bg-[#e6f0fa] text-gray-800 font-sans overflow-x-hidden">
   <div id="root"></div>
   <script type="text/babel">
     const Particles = () => {
-      const particles = Array.from({ length: 25 }, (_, i) => (
+      const particles = Array.from({ length: 15 }, (_, i) => (
         <div
           class="particle"
           style={{
             left: `${Math.random() * 100}vw`,
             top: `${Math.random() * 100}vh`,
-            width: `${Math.random() * 12 + 6}px`,
-            height: `${Math.random() * 12 + 6}px`,
+            width: `${Math.random() * 8 + 4}px`,
+            height: `${Math.random() * 8 + 4}px`,
             backgroundColor: `hsl(${Math.random() * 60 + 240}, 70%, 90%)`,
-            animationDelay: `${Math.random() * 6}s`
+            animationDelay: `${Math.random() * 4}s`
           }}
         />
       ));
@@ -50,8 +74,8 @@
     };
 
     const Navbar = () => (
-      <nav class="fixed top-0 w-full bg-[#d9e1fa] bg-opacity-95 p-6 shadow-sm z-20 backdrop-blur-md">
-        <ul class="flex justify-center space-x-14 text-lg font-medium">
+      <nav class="fixed top-0 w-full bg-[#d9e1fa] bg-opacity-95 p-4 shadow-sm z-20 backdrop-blur-md">
+        <ul class="flex justify-center space-x-8 text-base font-medium">
           {['Domov', 'O mne', 'Ocenenia', 'Kontakt'].map((item) => (
             <li>
               <a href={`#${item.toLowerCase().replace(' ', '')}`} class="relative group">
@@ -71,82 +95,82 @@
           <path class="wave-bg" fill="none" stroke="#c9d3f5" strokeWidth="2" d="M0,50 Q50,40 100,50 T200,50" />
         </svg>
         <div class="text-center animate-fadeInUp z-10">
-          <h1 class="text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#a9b5e5] to-[#d9e1fa] animate-pulse">Filip Pohánka</h1>
+          <h1 class="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#a9b5e5] to-[#d9e1fa] animate-pulse">Filip Pohánka</h1>
         </div>
       </section>
     );
 
     const About = () => (
-      <section id="omne" class="min-h-screen flex items-center justify-center p-16 relative">
-        <svg class="absolute bottom-0 left-0 w-full h-1/3 opacity-10" viewBox="0 0 200 50">
+      <section id="omne" class="flex items-center justify-center p-8 relative">
+        <svg class="absolute bottom-0 left-0 w-full h-1/4 opacity-10" viewBox="0 0 200 50">
           <path class="wave-bg" fill="none" stroke="#d9e1fa" strokeWidth="3" d="M0,25 Q50,15 100,25 T200,25" />
         </svg>
-        <div class="max-w-3xl animate-fadeInUp bg-[#f5f8fe] bg-opacity-90 p-10 rounded-2xl shadow-xl">
-          <h2 class="text-5xl font-bold mb-8 text-[#a9b5e5]">O mne</h2>
-          <p class="text-xl text-[#6b7280] leading-relaxed">
+        <div class="max-w-3xl animate-fadeInUp bg-[#f5f8fe] bg-opacity-90 p-6 rounded-2xl shadow-xl">
+          <h2 class="text-4xl font-bold mb-6 text-[#a9b5e5]">O mne</h2>
+          <p class="text-lg text-[#6b7280] leading-relaxed">
             Som študent prvého ročníka na <a href="https://gma.edupage.org" class="text-[#a9b5e5] hover:underline">Gymnáziu Matky Alexie</a> so záujmom o technológie a kybernetickú bezpečnosť. Vo voľnom čase sa venujem etickému hackingu na webstránkach ako sú HackTheBox, TryHackMe alebo hackthissite.
           </p>
-          <p class="text-xl text-[#6b7280] leading-relaxed font-bold">Hľadám príležitosti na rozvoj svojich zručností a získanie skúseností v praxi</p>
+          <p class="text-lg text-[#6b7280] leading-relaxed font-bold">Hľadám príležitosti na rozvoj svojich zručností a získanie skúseností v praxi</p>
         </div>
       </section>
     );
 
     const Experience = () => (
-      <section id="ocenenia" class="min-h-screen flex items-center justify-center p-16 bg-[#e9eefc] bg-opacity-50 relative">
+      <section id="ocenenia" class="flex items-center justify-center p-8 bg-[#e9eefc] bg-opacity-50 relative">
         <div class="max-w-4xl animate-fadeInUp">
-          <h2 class="text-5xl font-bold mb-10 text-[#d9e1fa]">Ocenenia a zručnosti</h2>
-          <div class="space-y-10">
-            <div class="bg-[#f5f8fe] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 class="text-3xl font-semibold text-[#a9b5e5] mb-4">Ocenenia - Timeline</h3>
-              <div class="space-y-6">
+          <h2 class="text-4xl font-bold mb-8 text-[#d9e1fa]">Ocenenia a zručnosti</h2>
+          <div class="space-y-8">
+            <div class="bg-[#f5f8fe] p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 class="text-2xl font-semibold text-[#a9b5e5] mb-3">Ocenenia - Timeline</h3>
+              <div class="space-y-4">
                 <div class="timeline-item">
-                  <p class="text-xl text-[#6b7280] font-semibold">HackTheBox rank: Hacker</p>
-                  <p class="text-lg text-[#6b7280]">2023 - súčasnosť</p>
+                  <p class="text-lg text-[#6b7280] font-semibold">HackTheBox rank: Hacker</p>
+                  <p class="text-base text-[#6b7280]">2023 - súčasnosť</p>
                 </div>
                 <div class="timeline-item">
-                  <p class="text-xl text-[#6b7280] font-semibold">Top 10% v Scratch cup na Slovensku</p>
-                  <p class="text-lg text-[#6b7280]">7. ročník</p>
+                  <p class="text-lg text-[#6b7280] font-semibold">Top 10% v Scratch cup na Slovensku</p>
+                  <p class="text-base text-[#6b7280]">7. ročník</p>
                 </div>
                 <div class="timeline-item">
-                  <p class="text-xl text-[#6b7280] font-semibold">Účasť na Python cup a školských turnajoch v šachu</p>
-                  <p class="text-lg text-[#6b7280]">Rôzne roky</p>
+                  <p class="text-lg text-[#6b7280] font-semibold">Účasť na Python cup a školských turnajoch v šachu</p>
+                  <p class="text-base text-[#6b7280]">Rôzne roky</p>
                 </div>
                 <div class="timeline-item">
-                  <p class="text-xl text-[#6b7280] font-semibold">2. miesto na bratislavskej lige vo florballe</p>
-                  <p class="text-lg text-[#6b7280]">Účasť na majstrovstvách Slovenska</p>
+                  <p class="text-lg text-[#6b7280] font-semibold">2. miesto na bratislavskej lige vo florballe</p>
+                  <p class="text-base text-[#6b7280]">Účasť na majstrovstvách Slovenska</p>
                 </div>
               </div>
             </div>
-            <div class="bg-[#f5f8fe] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 class="text-3xl font-semibold text-[#a9b5e5]">Zručnosti</h3>
-              <div class="mt-4 space-y-4">
+            <div class="bg-[#f5f8fe] p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 class="text-2xl font-semibold text-[#a9b5e5]">Zručnosti</h3>
+              <div class="mt-3 space-y-3">
                 <div>
-                  <p class="text-lg text-[#6b7280]">🐍 Python</p>
+                  <p class="text-base text-[#6b7280]">🐍 Python</p>
                   <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '70%' }}></div></div>
                 </div>
                 <div>
-                  <p class="text-lg text-[#6b7280]">🍎 Swift</p>
+                  <p class="text-base text-[#6b7280]">🍎 Swift</p>
                   <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '30%' }}></div></div>
                 </div>
                 <div>
-                  <p class="text-lg text-[#6b7280]">🇸🇰 Slovenčina</p>
+                  <p class="text-base text-[#6b7280]">🇸🇰 Slovenčina</p>
                   <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '100%' }}></div></div>
                 </div>
                 <div>
-                  <p class="text-lg text-[#6b7280]">🇬🇧 Angličtina</p>
+                  <p class="text-base text-[#6b7280]">🇬🇧 Angličtina</p>
                   <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '90%' }}></div></div>
                 </div>
                 <div>
-                  <p class="text-lg text-[#6b7280]">🇩🇪 Nemčina</p>
+                  <p class="text-base text-[#6b7280]">🇩🇪 Nemčina</p>
                   <div class="progress-bar"><div class="progress-fill bg-[#a9b5e5]" style={{ width: '40%' }}></div></div>
                 </div>
               </div>
-              <p class="text-xl text-[#6b7280] leading-relaxed mt-4">Ostatné záujmy:</p>
-              <div class="flex flex-wrap gap-4 mt-2">
-                <span class="text-lg text-[#6b7280]" title="Hra na gitare">Hra na gitare</span>
-                <span class="text-lg text-[#6b7280]" title="Experimentálny rap">Experimentálny rap</span>
-                <span class="text-lg text-[#6b7280]" title="Čítanie biografií">Čítanie biografií o inovátoroch</span>
-                <span class="text-lg text-[#6b7280]" title="Fitko">Fitko</span>
+              <p class="text-lg text-[#6b7280] leading-relaxed mt-4">Ostatné záujmy:</p>
+              <div class="flex flex-wrap gap-3 mt-2">
+                <span class="text-base text-[#6b7280]" title="Hra na gitare">Hra na gitare</span>
+                <span class="text-base text-[#6b7280]" title="Experimentálny rap">Experimentálny rap</span>
+                <span class="text-base text-[#6b7280]" title="Čítanie biografií">Čítanie biografií o inovátoroch</span>
+                <span class="text-base text-[#6b7280]" title="Fitko">Fitko</span>
               </div>
             </div>
           </div>
@@ -155,16 +179,16 @@
     );
 
     const Contact = () => (
-      <section id="kontakt" class="min-h-screen flex items-center justify-center p-16 relative">
-        <svg class="absolute top-0 left-0 w-full h-1/2 opacity-15" viewBox="0 0 200 100">
+      <section id="kontakt" class="flex items-center justify-center p-8 relative">
+        <svg class="absolute top-0 left-0 w-full h-1/3 opacity-15" viewBox="0 0 200 100">
           <path class="wave-bg" fill="none" stroke="#c9d3f5" strokeWidth="2" d="M0,50 Q50,40 100,50 T200,50" />
         </svg>
-        <div class="text-center animate-fadeInUp bg-[#f5f8fe] bg-opacity-90 p-10 rounded-2xl shadow-xl">
-          <h2 class="text-5xl font-bold mb-8 text-[#d9e1fa]">Kontakt</h2>
-          <p class="text-xl text-[#6b7280] mb-3">Email: <a href="mailto:filip.pohanka@icloud.com" class="text-[#a9b5e5] hover:underline">filip.pohanka@icloud.com</a></p>
-          <p class="text-xl text-[#6b7280] mb-3">Tel: <span class="text-[#a9b5e5]">+421 908 204 789</span></p>
-          <p class="text-xl text-[#6b7280] mb-3">HackTheBox: <a href="https://app.hackthebox.com/profile/967608" class="text-[#a9b5e5] hover:underline">LordHerharo</a></p>
-          <p class="text-xl text-[#6b7280] mb-3">TryHackMe: <a href="https://tryhackme.com/p/Herharo" class="text-[#a9b5e5] hover:underline">Herharo</a></p>
+        <div class="text-center animate-fadeInUp bg-[#f5f8fe] bg-opacity-90 p-6 rounded-2xl shadow-xl">
+          <h2 class="text-4xl font-bold mb-6 text-[#d9e1fa]">Kontakt</h2>
+          <p class="text-lg text-[#6b7280] mb-2">Email: <a href="mailto:filip.pohanka@icloud.com" class="text-[#a9b5e5] hover:underline">filip.pohanka@icloud.com</a></p>
+          <p class="text-lg text-[#6b7280] mb-2">Tel: <span class="text-[#a9b5e5]">+421 908 204 789</span></p>
+          <p class="text-lg text-[#6b7280] mb-2">HackTheBox: <a href="https://app.hackthebox.com/profile/967608" class="text-[#a9b5e5] hover:underline">LordHerharo</a></p>
+          <p class="text-lg text-[#6b7280] mb-2">TryHackMe: <a href="https://tryhackme.com/p/Herharo" class="text-[#a9b5e5] hover:underline">Herharo</a></p>
         </div>
       </section>
     );
